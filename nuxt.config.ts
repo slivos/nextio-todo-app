@@ -10,6 +10,8 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
     "nuxt-phosphor-icons",
+    "@vueuse/nuxt",
+    "@pinia/nuxt",
   ],
   css: ["@/assets/css/global.css"],
   icon: {
@@ -36,6 +38,13 @@ export default defineNuxtConfig({
           href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
         },
       ],
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl:
+        process.env.NUXT_PUBLIC_API_BASE_URL || "https://todo.nextio.dev",
+      accessToken: process.env.NUXT_PUBLIC_ACCESS_TOKEN || "",
     },
   },
 });

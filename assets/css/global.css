@@ -1,3 +1,4 @@
 body {
   @apply font-serif;
+  @apply bg-lightGray-1;
 }

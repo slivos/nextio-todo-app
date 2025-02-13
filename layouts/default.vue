@@ -17,6 +17,7 @@
     </main>
 
     <ButtonPrimaryButton
+      v-if="!isBottom"
       class="fixed bottom-10 right-5 min-h-[52px] w-[calc(100%-40px)] lg:bottom-16 lg:right-[84px] lg:min-h-12 lg:w-auto"
       label="New task"
       icon="i-ph-plus"
@@ -29,4 +30,6 @@
 <script setup lang="ts">
 const overlay = ref(false);
 const isOpen = ref(false);
+
+const { isBottom } = useScrollBottom();
 </script>

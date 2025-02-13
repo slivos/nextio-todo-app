@@ -1,5 +1,3 @@
-import { ref, nextTick } from "vue";
-
 export const useAutoScroll = () => {
   const containerRef = ref<HTMLElement | null>(null);
 

@@ -2,17 +2,12 @@ export const useScrollBottom = () => {
   const isBottom = ref(false);
 
   const handleScroll = () => {
-    const offset = 16; // The offset in pixels
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPosition = Math.ceil(window.innerHeight + window.scrollY);
+    const documentHeight = Math.ceil(document.documentElement.scrollHeight);
 
     // Only apply the check if the document is taller than the viewport
     if (documentHeight > window.innerHeight) {
-      if (scrollPosition + offset >= documentHeight) {
-        isBottom.value = true;
-      } else {
-        isBottom.value = false;
-      }
+      isBottom.value = scrollPosition >= documentHeight;
     } else {
       // If the page is short, always show the button
       isBottom.value = false;

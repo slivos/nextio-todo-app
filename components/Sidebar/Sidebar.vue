@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex flex-col gap-10 bg-white rounded-t-2xl lg:rounded-2xl p-5 lg:ps-6 lg:pt-10 lg:pr-10 lg:pb-10 z-20"
+    class="relative z-20 flex flex-col gap-10 rounded-t-2xl bg-white p-5 lg:rounded-2xl lg:pb-10 lg:pr-10 lg:ps-6 lg:pt-10"
     :class="{
       'rounded-2xl': !open,
       'drop-shadow-sidebar lg:drop-shadow-none': open,
@@ -9,7 +9,7 @@
     <div class="flex items-center justify-between">
       <UIcon
         name="svg:logo"
-        class="w-[145px] h-[32px] lg:w-[163px] lg:h-[36px] flex-shrink-0"
+        class="h-[32px] w-[145px] flex-shrink-0 lg:h-[36px] lg:w-[163px]"
       />
       <UButton
         @click="toggleOpen"
@@ -23,7 +23,7 @@
     </div>
 
     <UVerticalNavigation
-      class="hidden lg:block absolute top-[72px] lg:top-auto left-0 lg:left-auto w-full lg:relative bg-white p-5 pt-8 pb-10 lg:p-0 rounded-b-2xl lg:rounded-none"
+      class="absolute left-0 top-[72px] hidden w-full rounded-b-2xl bg-white p-5 pb-10 pt-8 lg:relative lg:left-auto lg:top-auto lg:block lg:rounded-none lg:p-0"
       :class="{
         hidden: !open,
         block: open,
@@ -38,16 +38,17 @@
 const emit = defineEmits(["open"]);
 
 const categoriesStore = useCategoriesStore();
+const { getCategories } = categoriesStore;
 const { categories } = storeToRefs(categoriesStore);
+
+await getCategories();
 
 const mapLinks = computed(() => {
   return categories.value.map((category) => ({
     label: category.name,
     icon: "svg:square",
     iconClass: "w-[10px] h-[10px]",
-    to: `/categories/${String(category.name).toLowerCase()}/tasks?q=${
-      category.id
-    }`,
+    to: `/categories/${category.id}/tasks?name=${category.name}`,
   }));
 });
 

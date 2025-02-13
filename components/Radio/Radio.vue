@@ -1,18 +1,15 @@
 <template>
-  <client-only>
-    <label class="flex w-full items-center gap-[14px] cursor-pointer">
-      <input
-        type="radio"
-        :checked="isSelected"
-        @change="onChange"
-        class="form-radio w-5 h-5 border-gray-1 focus:ring-0 focus-within:ring-0 focus:outline-none focus-within:outline-none cursor-pointer"
-        :class="{
-          'hover:border-gray-2': !isSelected,
-        }"
-      />
-      <span>{{ option.name }}</span>
-    </label>
-  </client-only>
+  <label class="flex w-full cursor-pointer items-center gap-[14px]">
+    <input
+      type="radio"
+      :checked="isSelected"
+      class="form-radio h-5 w-5 cursor-pointer border-gray-1 focus-within:outline-none focus-within:ring-0 focus:outline-none focus:ring-0"
+      :class="{
+        'hover:border-gray-2': !isSelected,
+      }"
+    />
+    <span>{{ option.name }}</span>
+  </label>
 </template>
 
 <script setup lang="ts">
@@ -24,12 +21,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
-const emit = defineEmits(["update:isSelected"]);
-
-const onChange = (e: Event) => {
-  console.log(e);
-};
 </script>
 
 <style scoped>

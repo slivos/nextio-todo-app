@@ -73,3 +73,7 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Netlify deploy
+
+[Production build](https://nextio-todo.netlify.app/)

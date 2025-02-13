@@ -35,15 +35,15 @@
           <template #default="{ open }">
             <UButton
               color="white"
-              class="flex-1 justify-between rounded-full hover:bg-white text-base text-black py-4 px-6 ring-gray-1"
+              class="flex-1 justify-between rounded-full px-6 py-4 text-base text-black ring-gray-1 hover:bg-white"
               :class="{ 'ring-darkGray-1': open, 'hover:ring-gray-2': !open }"
             >
               {{ category?.name ? category.name : "Select category" }}
 
               <UIcon
                 name="i-ph-caret-down"
-                class="w-6 h-6 transition-transform"
-                :class="[open && 'transform rotate-180']"
+                class="h-6 w-6 transition-transform"
+                :class="[open && 'rotate-180 transform']"
               />
             </UButton>
           </template>
@@ -81,6 +81,8 @@ const taskStore = useTaskStore();
 const { addTask } = taskStore;
 const categoriesStore = useCategoriesStore();
 const { categories } = storeToRefs(categoriesStore);
+const route = useRoute();
+const query = `filter[category][_eq]=${route.params.id}`;
 
 const category = ref<CategoryProps>();
 const todo = ref("");
@@ -88,7 +90,11 @@ const todo = ref("");
 const handleAddTask = async () => {
   if (!todo.value || !category.value) return;
 
-  await addTask(todo.value, category.value.id).finally(() => {
+  await addTask(
+    todo.value,
+    category.value.id,
+    route.params.id ? query : "",
+  ).finally(() => {
     category.value = undefined;
     todo.value = "";
   });

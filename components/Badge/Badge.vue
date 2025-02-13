@@ -1,7 +1,5 @@
 <template>
-  <client-only>
-    <UBadge :ui="badgeUI">{{ category?.name }}</UBadge>
-  </client-only>
+  <UBadge :ui="badgeUI">{{ category?.name }}</UBadge>
 </template>
 
 <script setup lang="ts">

@@ -6,6 +6,7 @@ export const useTasksStore = defineStore("tasks", () => {
   const { getApiUrl } = useApiUrl();
   const tasks = ref<TaskProps[]>([]);
   const finishedTasks = ref<TaskProps[]>([]);
+  const loading = ref(false);
 
   const getTasks = async (query?: string) => {
     try {
@@ -20,8 +21,10 @@ export const useTasksStore = defineStore("tasks", () => {
 
       if (res.data) tasks.value = res.data;
     } catch (error) {
+      loading.value = false;
       console.error(error);
     }
+    loading.value = false;
   };
 
   const getFinishedTasks = async () => {
@@ -29,15 +32,17 @@ export const useTasksStore = defineStore("tasks", () => {
       const res = await $fetch<TasksListProps>(
         getApiUrl(
           "/items/todos",
-          "sort=date_updated&filter[is_completed][_eq]=true"
+          "sort=-date_updated&filter[is_completed][_eq]=true"
         )
       );
 
       if (res.data) finishedTasks.value = res.data;
     } catch (error) {
+      loading.value = false;
       console.error(error);
     }
+    loading.value = false;
   };
 
-  return { tasks, finishedTasks, getTasks, getFinishedTasks };
+  return { tasks, finishedTasks, loading, getTasks, getFinishedTasks };
 });

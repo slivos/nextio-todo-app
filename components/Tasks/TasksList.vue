@@ -1,20 +1,17 @@
 <template>
-  <client-only>
-    <div class="flex flex-col gap-5">
-      <h2 class="inline-flex items-center gap-2 text-xl font-medium">
-        <slot name="title"> </slot>
-        <span v-if="title">{{ title }}</span>
+  <div class="flex flex-col gap-5">
+    <h2 class="inline-flex items-center gap-2 text-xl font-medium">
+      <span v-if="title">{{ title }}</span>
 
-        <UBadge v-if="count" color="black" :ui="badgeUI">{{ count }}</UBadge>
-      </h2>
+      <UBadge v-if="count" color="black" :ui="badgeUI">{{ count }}</UBadge>
+    </h2>
 
-      <div class="flex flex-col gap-2">
-        <Task v-for="task in data" :key="task.id" :task="task" />
+    <div class="flex flex-col gap-2">
+      <Task v-for="task in data" :key="task.id" :task="task" />
 
-        <slot name="link"></slot>
-      </div>
+      <slot name="link"></slot>
     </div>
-  </client-only>
+  </div>
 </template>
 
 <script setup lang="ts">

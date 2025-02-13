@@ -12,7 +12,9 @@ export const useCategoriesStore = defineStore("categories", () => {
       const res = await $fetch<CategoriesProps>(getApiUrl("/items/categories"));
 
       if (res.data) categories.value = res.data;
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return { categories, getCategories };

@@ -1,7 +1,7 @@
 <template>
-  <div class="relative min-h-screen lg:grid grid-cols-[343px,1fr] p-3 lg:p-6">
+  <div class="relative min-h-screen grid-cols-[343px,1fr] p-3 lg:grid lg:p-6">
     <div
-      class="lg:hidden pointer-events-none absolute top-0 left-0 w-full min-h-screen h-full z-10"
+      class="pointer-events-none absolute left-0 top-0 z-10 h-full min-h-screen w-full lg:hidden"
       :class="{
         'bg-overlay lg:bg-transparent': overlay,
       }"
@@ -10,14 +10,14 @@
 
     <main class="flex-1">
       <div
-        class="px-2 lg:px-[60px] py-5 lg:py-9 mx-auto lg:mx-0 max-w-7xl lg:max-w-full"
+        class="mx-auto max-w-7xl px-2 py-5 lg:mx-0 lg:max-w-full lg:px-[60px] lg:py-9"
       >
         <slot />
       </div>
     </main>
 
     <ButtonPrimaryButton
-      class="fixed w-[calc(100%-40px)] lg:w-auto bottom-10 lg:bottom-16 right-5 lg:right-[84px] min-h-[52px] lg:min-h-12"
+      class="fixed bottom-10 right-5 min-h-[52px] w-[calc(100%-40px)] lg:bottom-16 lg:right-[84px] lg:min-h-12 lg:w-auto"
       label="New task"
       icon="i-ph-plus"
       @click="isOpen = true"
@@ -27,11 +27,6 @@
 </template>
 
 <script setup lang="ts">
-const categoriesStore = useCategoriesStore();
-const { getCategories } = categoriesStore;
-
 const overlay = ref(false);
 const isOpen = ref(false);
-
-await getCategories();
 </script>

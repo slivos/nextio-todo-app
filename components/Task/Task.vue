@@ -10,7 +10,7 @@
 
     <UButton
       v-if="task.is_completed"
-      class="ms-3 lg:ms-4 ring-lightGray-1 hover:ring-red-1 hover:bg-white text-black hover:text-red-1 rounded-lg size-8 lg:size-10 p-2 lg:p-3 flex justify-center items-center"
+      class="ms-3 flex size-8 items-center justify-center rounded-lg p-2 text-black ring-lightGray-1 hover:bg-white hover:text-red-1 hover:ring-red-1 lg:ms-4 lg:size-10 lg:p-3"
       icon="i-ph-trash"
       size="lg"
       square
@@ -33,17 +33,19 @@ const taskStore = useTaskStore();
 const { updateTask, deleteTask } = taskStore;
 const categoriesStore = useCategoriesStore();
 const { categories } = storeToRefs(categoriesStore);
+const route = useRoute();
+const query = `filter[category][_eq]=${route.params.id}`;
 
 const currentCategory = computed(() => {
   const category = categories.value.find(
-    (cat) => cat.id === props.task.category
+    (cat) => cat.id === props.task.category,
   );
 
   return category;
 });
 
 const handleUpdate = (isCompleted: boolean) => {
-  updateTask(props.task.id, isCompleted);
+  updateTask(props.task.id, isCompleted, route.params.id ? query : "");
 };
 
 const cardUI = {

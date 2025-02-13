@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col gap-11">
-    <ClientOnly>
+    <BaseOverviewSkeleton v-if="isLoading" />
+    <ClientOnly v-else>
       <h1
         class="text-3.5xl font-medium leading-10.5 lg:text-4.5xl lg:leading-13"
       >
@@ -15,6 +16,10 @@
 </template>
 
 <script setup lang="ts">
+const isLoading = ref(false);
+
+isLoading.value = true;
+
 const today = computed(() => {
   const d = new Date();
   return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;
@@ -33,5 +38,9 @@ const greeting = computed(() => {
   }
 
   return `${message} Daniel`;
+});
+
+onMounted(() => {
+  isLoading.value = false;
 });
 </script>

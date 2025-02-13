@@ -7,7 +7,10 @@ export const useTaskStore = defineStore("task", () => {
   const { getTasks, getFinishedTasks } = tasksStore;
   const { loading } = storeToRefs(tasksStore);
   const { containerRef, scrollToBottom } = useAutoScroll();
-  containerRef.value = document?.body;
+
+  if (import.meta.client) {
+    containerRef.value = document?.body;
+  }
 
   const addTask = async (todo: string, categoryId: string, query?: string) => {
     try {
@@ -31,7 +34,7 @@ export const useTaskStore = defineStore("task", () => {
   const updateTask = async (
     id: string,
     is_completed: boolean,
-    query?: string
+    query?: string,
   ) => {
     loading.value = true;
     try {

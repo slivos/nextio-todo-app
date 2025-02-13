@@ -1,12 +1,15 @@
 <template>
   <div class="flex flex-col gap-11">
-    <h1 class="text-3.5xl font-medium leading-10.5 lg:text-4.5xl lg:leading-13">
-      <span>{{ greeting }}</span>
-      <span class="ms-3 hidden text-xl font-medium text-gray-3 lg:inline">
-        {{ today }}</span
+    <ClientOnly>
+      <h1
+        class="text-3.5xl font-medium leading-10.5 lg:text-4.5xl lg:leading-13"
       >
-    </h1>
-
+        <span>{{ greeting }}</span>
+        <span class="ms-3 hidden text-xl font-medium text-gray-3 lg:inline">
+          {{ today }}</span
+        >
+      </h1>
+    </ClientOnly>
     <slot />
   </div>
 </template>

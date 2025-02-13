@@ -2,7 +2,7 @@ export const useScrollBottom = () => {
   const isBottom = ref(false);
 
   const handleScroll = () => {
-    const offset = 64; // The offset in pixels
+    const offset = 16; // The offset in pixels
     const scrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.documentElement.scrollHeight;
 
